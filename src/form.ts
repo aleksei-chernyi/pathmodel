@@ -101,7 +101,9 @@ export abstract class FormBase {
 
   private readonly dotPathMap: Record<string, Map<FormBase, string>> = {}
   private validationErrors: ValidationErrors = {}
-  private valueSchema: ValidationRules | null = null
+  // Kept behind a function so reactive wrappers (e.g. Vue's `reactive()`) never proxy the
+  // schema itself: schemas such as Zod's have read-only properties a proxy cannot wrap.
+  private getValueSchema: () => ValidationRules | null = () => null
 
   constructor(
     public readonly options: FormOptionsInterface,
@@ -318,7 +320,7 @@ export abstract class FormBase {
 
   /** Sets a schema validated against the whole form value (`getFormValue()`) by `validate()`. */
   setValueSchema(schema: ValidationRules | null) {
-    this.root.valueSchema = schema
+    this.root.getValueSchema = () => schema
   }
 
   /**
@@ -333,11 +335,10 @@ export abstract class FormBase {
     const inScope = (dotPath: string) =>
       !nodes || scope.some((scopePath) => isWithinDotPath(dotPath, scopePath))
 
+    const valueSchema = this.root.getValueSchema()
     const results = await Promise.all([
       ...fieldNodes.map((node) => validateFieldNode(node)),
-      this.root.valueSchema
-        ? validateWithSchema(this.root.valueSchema, this.getFormValue())
-        : Promise.resolve({}),
+      valueSchema ? validateWithSchema(valueSchema, this.getFormValue()) : Promise.resolve({}),
     ])
 
     const nextErrors: ValidationErrors = {}

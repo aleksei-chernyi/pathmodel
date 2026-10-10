@@ -1,5 +1,6 @@
 import "reflect-metadata"
 import { describe, it, expect } from "vitest"
+import { reactive } from "vue"
 import { z } from "zod"
 import {
   COMPONENT_KIND,
@@ -110,6 +111,16 @@ describe("FormBase.validate", () => {
     const { form } = createForm()
     form.setValueSchema(passwordsMatch)
     form.contacts.email = "ada@example.com"
+    form.account.password = "secret"
+    form.account.confirm = "other"
+
+    expect(await form.validate()).toBe(false)
+    expect(form.getValidationError("account.confirm")).toBe("Passwords do not match")
+  })
+
+  it("validates the value schema of a form wrapped in reactive()", async () => {
+    const form = reactive(createForm().form)
+    form.setValueSchema(passwordsMatch)
     form.account.password = "secret"
     form.account.confirm = "other"
 
