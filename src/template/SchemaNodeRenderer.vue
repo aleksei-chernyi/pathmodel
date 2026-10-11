@@ -39,9 +39,14 @@
 
 <script setup lang="ts">
 import { computed } from "vue"
-import { FieldNode, LayoutNode, SomeNode } from "../schema"
-import { FormBase } from "../form"
-import { isFieldComponent, isLayoutComponent, LayoutComponent } from "../component-kind"
+import { isFieldComponent, isLayoutComponent } from "@aleksei-chernyi/pathmodel"
+import type {
+  FieldNode,
+  FormBase,
+  LayoutComponent,
+  LayoutNode,
+  SomeNode,
+} from "@aleksei-chernyi/pathmodel"
 import Empty from "../layout/Empty.vue"
 
 const props = defineProps<{

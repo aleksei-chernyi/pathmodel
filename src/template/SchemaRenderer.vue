@@ -4,8 +4,7 @@
 
 <script setup lang="ts">
 import SchemaNodeRenderer from "./SchemaNodeRenderer.vue"
-import { SomeNode } from "../schema"
-import { FormBase } from "../form"
+import type { FormBase, SomeNode } from "@aleksei-chernyi/pathmodel"
 
 const { root, nodes } = defineProps<{
   nodes: SomeNode[]

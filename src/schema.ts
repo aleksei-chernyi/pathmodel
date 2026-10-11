@@ -1,6 +1,6 @@
 import "reflect-metadata"
-import { FormBase } from "./form"
-import { FieldComponent, LayoutComponent } from "./component-kind"
+import type { FormBase } from "./form"
+import type { FieldComponent, LayoutComponent } from "./component-kind"
 import type { ValidationRules } from "./validation"
 
 export interface LayoutSchemaOptions<T> {
@@ -32,25 +32,53 @@ export type SchemaMetadata = Record<string, SchemaOptions>
 export type SomeNode = LayoutNode | FieldNode
 
 export class LayoutNode<F extends FormBase = FormBase> {
+  readonly form: F
+  readonly component: LayoutComponent
+  readonly label: string
+  readonly children: SomeNode[]
+  readonly options: Record<string, any>
+
   constructor(
-    public readonly form: F,
-    public readonly component: LayoutComponent,
-    public readonly label: string,
-    public readonly children: SomeNode[],
-    public readonly options: Record<string, any>
-  ) {}
+    form: F,
+    component: LayoutComponent,
+    label: string,
+    children: SomeNode[],
+    options: Record<string, any>
+  ) {
+    this.form = form
+    this.component = component
+    this.label = label
+    this.children = children
+    this.options = options
+  }
 }
 
 export class FieldNode<Props = Record<string, any>, F extends FormBase = FormBase> {
+  readonly form: F
+  readonly component: FieldComponent
+  readonly name: string
+  readonly dotPath: string
+  readonly nodePath: string
+  readonly props: Props
+  readonly options: FieldOptions
+
   constructor(
-    public readonly form: F,
-    public readonly component: FieldComponent,
-    public readonly name: string,
-    public readonly dotPath: string,
-    public readonly nodePath: string,
-    public readonly props: Props,
-    public readonly options: FieldOptions
-  ) {}
+    form: F,
+    component: FieldComponent,
+    name: string,
+    dotPath: string,
+    nodePath: string,
+    props: Props,
+    options: FieldOptions
+  ) {
+    this.form = form
+    this.component = component
+    this.name = name
+    this.dotPath = dotPath
+    this.nodePath = nodePath
+    this.props = props
+    this.options = options
+  }
 
   async setValue(value: any): Promise<void> {
     // await this.node.setValue(this.name, value)

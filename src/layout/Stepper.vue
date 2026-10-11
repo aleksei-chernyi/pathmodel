@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { computed, ref, watch, nextTick } from "vue"
-import { FormBase } from "../form"
-import { COMPONENT_KIND } from "../component-kind"
+import { COMPONENT_KIND, FieldNode, LayoutNode } from "@aleksei-chernyi/pathmodel"
+import type { FormBase, FormSwitch, SomeNode } from "@aleksei-chernyi/pathmodel"
 import Case from "./Case.vue"
-import { FieldNode, LayoutNode, SomeNode } from "../schema"
-import { FormSwitch } from "../form-switch"
 
 interface props {
   node: LayoutNode<FormSwitch>

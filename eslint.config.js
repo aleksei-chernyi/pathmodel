@@ -45,6 +45,8 @@ module.exports = [
       ],
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "@typescript-eslint/no-explicit-any": "off",
+      // Apps type-check the shipped source with `verbatimModuleSyntax` (e.g. the Vite template).
+      "@typescript-eslint/consistent-type-imports": "error",
     },
   },
 

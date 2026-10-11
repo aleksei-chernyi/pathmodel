@@ -3,8 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import { COMPONENT_KIND } from "../component-kind"
-import { FormBase } from "../form"
+import { COMPONENT_KIND } from "@aleksei-chernyi/pathmodel"
+import type { FormBase } from "@aleksei-chernyi/pathmodel"
 
 defineProps<{
   node?: {

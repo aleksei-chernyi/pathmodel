@@ -1,18 +1,15 @@
 import "reflect-metadata"
 import { describe, it, expect } from "vitest"
+import type { FieldNode, LayoutComponent, FieldComponent, LayoutNode } from "../src"
 import {
   FormBase,
-  FieldNode,
   Schema,
   Nested,
   NestedArray,
   FormOptions,
   getFormOptions,
   isFieldComponent,
-  LayoutComponent,
-  FieldComponent,
   COMPONENT_KIND,
-  LayoutNode,
 } from "../src"
 import Col from "../src/layout/Col.vue"
 import Row from "../src/layout/Row.vue"

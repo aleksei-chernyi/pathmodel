@@ -1,21 +1,9 @@
 import "reflect-metadata"
-import {
-  FieldNode,
-  FieldSchemaOptions,
-  getSchema,
-  LayoutNode,
-  LayoutSchemaOptions,
-  SomeNode,
-} from "./schema"
+import { FieldNode, getSchema, LayoutNode } from "./schema"
+import type { FieldSchemaOptions, LayoutSchemaOptions, SomeNode } from "./schema"
 import { isFieldComponent } from "./component-kind"
-import {
-  addError,
-  isWithinDotPath,
-  validateFieldNode,
-  validateWithSchema,
-  ValidationErrors,
-  ValidationRules,
-} from "./validation"
+import { addError, isWithinDotPath, validateFieldNode, validateWithSchema } from "./validation"
+import type { ValidationErrors, ValidationRules } from "./validation"
 
 export interface FormOptionsInterface {
   title: string
@@ -105,14 +93,15 @@ export abstract class FormBase {
   // schema itself: schemas such as Zod's have read-only properties a proxy cannot wrap.
   private getValueSchema: () => ValidationRules | null = () => null
 
-  constructor(
-    public readonly options: FormOptionsInterface,
-    public readonly root: FormBase = this
-  ) {
+  readonly options: FormOptionsInterface
+  readonly root: FormBase
+
+  constructor(options: FormOptionsInterface, root?: FormBase) {
+    this.root = root ?? this
     const defaultOptions = { keepInValue: true }
     this.options = { ...defaultOptions, ...options }
 
-    this.initializeNestedClasses(root)
+    this.initializeNestedClasses(this.root)
     this.initializeDefaultsRecursive()
   }
 

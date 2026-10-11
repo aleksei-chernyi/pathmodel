@@ -5,9 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import { COMPONENT_KIND } from "../component-kind"
-import { FormBase } from "../form"
-import { LayoutNode } from "../schema"
+import { COMPONENT_KIND } from "@aleksei-chernyi/pathmodel"
+import type { FormBase, LayoutNode } from "@aleksei-chernyi/pathmodel"
 
 defineProps<{
   node?: LayoutNode

@@ -2,13 +2,11 @@ import "reflect-metadata"
 import { describe, it, expect } from "vitest"
 import { reactive } from "vue"
 import { z } from "zod"
+import type { FieldComponent, LayoutComponent, LayoutNode } from "../src"
 import {
   COMPONENT_KIND,
   DEFAULT_REQUIRED_MESSAGE,
-  FieldComponent,
   FormBase,
-  LayoutComponent,
-  LayoutNode,
   Nested,
   Schema,
   issuePathToDotPath,

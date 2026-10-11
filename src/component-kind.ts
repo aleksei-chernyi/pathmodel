@@ -6,9 +6,18 @@ export type LayoutComponent = Component<COMPONENT_KIND.LAYOUT> & {
 }
 export type FieldComponent = VueComponent | Component<COMPONENT_KIND.FIELD>
 
-export enum COMPONENT_KIND {
-  FIELD = "field",
-  LAYOUT = "layout",
+/** Marks a Vue component as a field or a layout: `defineOptions({ __kind: COMPONENT_KIND.LAYOUT })`. */
+export const COMPONENT_KIND = {
+  FIELD: "field",
+  LAYOUT: "layout",
+} as const
+
+export type COMPONENT_KIND = (typeof COMPONENT_KIND)[keyof typeof COMPONENT_KIND]
+
+// Keeps `COMPONENT_KIND.LAYOUT` usable as a type, as it was with the former enum.
+export declare namespace COMPONENT_KIND {
+  type FIELD = typeof COMPONENT_KIND.FIELD
+  type LAYOUT = typeof COMPONENT_KIND.LAYOUT
 }
 
 export function isLayoutComponent(

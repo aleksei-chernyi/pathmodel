@@ -1,6 +1,6 @@
 {
   "name": "@aleksei-chernyi/pathmodel",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Class-based data models addressed by dot paths, with decorators, validation and Vue 3 form rendering",
   "license": "MIT",
   "author": "Aleksei Chernyi <4er.aleksei@gmail.com>",

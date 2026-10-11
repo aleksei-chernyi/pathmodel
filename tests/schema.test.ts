@@ -1,6 +1,7 @@
 import "reflect-metadata"
 import { describe, it, expect } from "vitest"
-import { Schema, getSchema, LayoutComponent, COMPONENT_KIND, FieldComponent } from "../src"
+import type { LayoutComponent, FieldComponent } from "../src"
+import { Schema, getSchema, COMPONENT_KIND } from "../src"
 
 class SimpleModel {
   firstName!: string

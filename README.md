@@ -162,7 +162,8 @@ Rendering:
 import { reactive } from "vue"
 import SchemaRenderer from "@aleksei-chernyi/pathmodel/src/template/SchemaRenderer.vue"
 
-const form = reactive(new UserForm({ title: "User" }))
+// `reactive()` returns an unwrapped type; the cast keeps the class type for `:root`.
+const form = reactive(new UserForm({ title: "User" })) as UserForm
 const nodes = form.buildSchema()
 </script>
 
